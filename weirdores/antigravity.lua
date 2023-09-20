@@ -32,16 +32,16 @@ minetest.register_node("weirdores:antigravity",{
 
 minetest.register_globalstep(function(dtime)
 	for _, p in ipairs(minetest.get_connected_players()) do
-		local pos = p:getpos()
+		local pos = p:get_pos()
 		local rpos = {
 			x = math.floor(pos.x+.5),
 			y = math.floor(pos.y+.5),
 			z = math.floor(pos.z+.5)
 		}
 		if is_antigravity(rpos) then
-			p:set_physics_override(nil,nil,-1)
+			p:set_physics_override({gravity = -1})
 		else
-			p:set_physics_override(nil,nil,1)
+			p:set_physics_override({gravity = 1})
 		end
 	end
 end)
