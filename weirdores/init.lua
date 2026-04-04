@@ -1,14 +1,4 @@
--- Configuration
--- Remove the modules you do not want to load
-local MODULES = {
-	"ruby",
-	"antimese",
-	"antigravity",
-}
-
--- End of configuration
-
-local MODPATH = minetest.get_modpath("weirdores")
-for i, m in ipairs(MODULES) do
-	dofile(MODPATH.."/"..m..".lua")
-end
+local modpath = minetest.get_modpath("weirdores")
+dofile(modpath .. "/ruby.lua")
+dofile(modpath .. "/antimese.lua")
+dofile(modpath .. "/antigravity.lua")

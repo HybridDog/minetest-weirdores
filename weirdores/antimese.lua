@@ -9,7 +9,6 @@ minetest.register_craftitem("weirdores:antimese", {
 minetest.register_node("weirdores:antimeseblock", {
 	description = "Antimese Block",
 	tiles = {"weirdores_antimese_block.png"},
-	is_ground_content = true,
 	groups = {anti=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -63,7 +62,7 @@ minetest.register_abm({
 	neighbors={"weirdores:rubyblock"},
 	interval = 5.0,
 	chance = 5,
-	action = function(pos,node,active_object_count,active_object_count_wider)
+	action = function(pos)
 		minetest.add_particlespawner({
 			amount = 10,
 			time = 1,

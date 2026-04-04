@@ -15,12 +15,8 @@ end
 minetest.register_node("weirdores:antigravity",{
 	description = "Antigravity",
 	tiles = {"weirdores_antigravity.png"},
-	is_ground_content = true,
 	groups = {anti=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
-	on_construct = function(pos)
-		-- Registers antigravity in abm, so no need to do it here
-	end,
 	on_destruct = function(pos)
 		for i, a in ipairs(antigravities) do
 			if a.x == pos.x and a.y == pos.y and a.z == pos.z then
@@ -30,7 +26,7 @@ minetest.register_node("weirdores:antigravity",{
 	end,
 })
 
-minetest.register_globalstep(function(dtime)
+minetest.register_globalstep(function()
 	for _, p in ipairs(minetest.get_connected_players()) do
 		local pos = p:get_pos()
 		local rpos = {
@@ -50,7 +46,7 @@ minetest.register_abm({
 	nodenames={"weirdores:antigravity"},
 	interval = 5,
 	chance = 1,
-	action = function(pos, node)
+	action = function(pos)
 		minetest.add_particlespawner({
 			amount = 100,
 			time = 10,

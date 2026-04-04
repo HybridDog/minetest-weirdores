@@ -6,7 +6,6 @@ minetest.register_craftitem("weirdores:ruby", {
 minetest.register_node("weirdores:stone_with_ruby", {
 	description = "Rubies in Stone",
 	tiles = {"default_stone.png^weirdores_mineral_ruby.png"},
-	is_ground_content = true,
 	groups = {cracky=1},
 	drop = "weirdores:ruby",
 	sounds = default.node_sound_stone_defaults(),
@@ -15,8 +14,6 @@ minetest.register_node("weirdores:stone_with_ruby", {
 minetest.register_node("weirdores:rubyblock", {
 	description = "Ruby Block",
 	tiles = {"weirdores_ruby_block.png"},
-	-- light_source = LIGHT_MAX, --TODO make Ruby lamp
-	is_ground_content = true,
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
 })
