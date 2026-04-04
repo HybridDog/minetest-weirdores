@@ -97,23 +97,19 @@ minetest.register_abm({
 			collisiondetection = false,
 			texture = "weirdores_particle_mese.png",
 		})
-		local r = 2 -- Radius for destroying
-		for x = pos.x-r, pos.x+r, 1 do
-			for y = pos.y-r, pos.y+r, 1 do
-				for z = pos.z-r, pos.z+r, 1 do
-					local cpos = {x=x,y=y,z=z}
-					if minetest.get_node(cpos).name == "weirdores:rubyblock" then
-						local e = minetest.add_item(cpos,{name="weirdores:antimese"})
-						e:set_velocity({x=0,y=10,z=0})
-					end
-					-- The commented part allows to randomly destroy nodes around
-					if --[[math.random(0,1) == 1
-					or]] minetest.get_node(cpos).name == "weirdores:rubyblock"
-					or minetest.get_node(cpos).name == "default:mese" then
-						minetest.remove_node(cpos)
-					end
-				end
-			end
+		local destroy_radius = 2
+		local nodes_in_area = minetest.find_nodes_in_area(
+			vector.subtract(pos, destroy_radius),
+			vector.add(pos, destroy_radius),
+			{"weirdores:rubyblock", "default:mese"},
+			true
+		)
+		for _, cpos in ipairs(nodes_in_area["weirdores:rubyblock"]) do
+			minetest.add_item(cpos, {name="weirdores:antimese"})
+				:set_velocity(vector.new(0, 10, 0))
+		end
+		for _, positions in pairs(nodes_in_area) do
+			minetest.bulk_set_node(positions, {name="air"})
 		end
 	end,
 })
