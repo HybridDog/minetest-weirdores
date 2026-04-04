@@ -64,34 +64,54 @@ minetest.register_abm({
 	interval = 5.0,
 	chance = 5,
 	action = function(pos,node,active_object_count,active_object_count_wider)
-		minetest.add_particlespawner(10, 1,
-			pos, pos,
-			{x=-10,y=-10,z=-10}, {x=10,y=10,z=10},
-			{x=-100,y=-100,z=-100}, {x=100,y=100,z=10},
-			1, 1,
-			.1,10,
-			false, "weirdores_particle_ruby.png")
-		minetest.add_particlespawner(100, 1,
-			pos, pos,
-			{x=-10,y=-10,z=-10}, {x=10,y=10,z=10},
-			{x=-100,y=-100,z=-100}, {x=100,y=100,z=100},
-			1, 1,
-			.1,10,
-			false, "weirdores_particle_mese.png")
+		minetest.add_particlespawner({
+			amount = 10,
+			time = 1,
+			pos = pos,
+			vel = {
+				min = vector.new(-10, -10, -10),
+				max = vector.new(10, 10, 10)
+			},
+			acc = {
+				min = vector.new(-100, -100, -100),
+				max = vector.new(100, 100, 10)
+			},
+			exptime = 1,
+			size = {min = 0.1, max = 10},
+			collisiondetection = false,
+			texture = "weirdores_particle_ruby.png",
+		})
+		minetest.add_particlespawner({
+			amount = 100,
+			time = 1,
+			pos = pos,
+			vel = {
+				min = vector.new(-10, -10, -10),
+				max = vector.new(10, 10, 10)
+			},
+			acc = {
+				min = vector.new(-100, -100, -100),
+				max = vector.new(100, 100, 100)
+			},
+			exptime = 1,
+			size = {min = 0.1, max = 10},
+			collisiondetection = false,
+			texture = "weirdores_particle_mese.png",
+		})
 		local r = 2 -- Radius for destroying
 		for x = pos.x-r, pos.x+r, 1 do
 			for y = pos.y-r, pos.y+r, 1 do
 				for z = pos.z-r, pos.z+r, 1 do
 					local cpos = {x=x,y=y,z=z}
-					if minetest.env:get_node(cpos).name == "weirdores:rubyblock" then
-						local e = minetest.env:add_item(cpos,{name="weirdores:antimese"})
-						e:setvelocity({x=0,y=10,z=0})
+					if minetest.get_node(cpos).name == "weirdores:rubyblock" then
+						local e = minetest.add_item(cpos,{name="weirdores:antimese"})
+						e:set_velocity({x=0,y=10,z=0})
 					end
 					-- The commented part allows to randomly destroy nodes around
 					if --[[math.random(0,1) == 1
-					or]] minetest.env:get_node(cpos).name == "weirdores:rubyblock"
-					or minetest.env:get_node(cpos).name == "default:mese" then
-						minetest.env:remove_node(cpos)
+					or]] minetest.get_node(cpos).name == "weirdores:rubyblock"
+					or minetest.get_node(cpos).name == "default:mese" then
+						minetest.remove_node(cpos)
 					end
 				end
 			end
