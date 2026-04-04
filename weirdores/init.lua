@@ -1,4 +1,3 @@
-
 -- Configuration
 -- Remove the modules you do not want to load
 local MODULES = {
@@ -9,7 +8,7 @@ local MODULES = {
 
 -- End of configuration
 
-local MODPATH = minetest.get_modpath("ruby")
+local MODPATH = minetest.get_modpath("weirdores")
 for i, m in ipairs(MODULES) do
 	dofile(MODPATH.."/"..m..".lua")
 end

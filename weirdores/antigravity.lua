@@ -39,9 +39,9 @@ minetest.register_globalstep(function(dtime)
 			z = math.floor(pos.z+.5)
 		}
 		if is_antigravity(rpos) then
-			p:set_physics_override(nil,nil,-1)
+			p:set_physics_override({gravity = -1})
 		else
-			p:set_physics_override(nil,nil,1)
+			p:set_physics_override({gravity = 1})
 		end
 	end
 end)
@@ -66,7 +66,7 @@ minetest.register_abm({
 			10, 10,
 			.1, 1,
 			false, "weirdores_particle_mese.png")
-			
+
 		if not is_antigravity({x=pos.x, y=pos.y+1, z=pos.z}) then
 			table.insert(antigravities,pos)
 		end
