@@ -26,18 +26,27 @@ minetest.register_node("weirdores:antigravity",{
 	end,
 })
 
+-- A mapping from player name to the gravity of the player before they've
+-- entered the antigravity
+local antigravity_players = {}
 minetest.register_globalstep(function()
 	for _, p in ipairs(minetest.get_connected_players()) do
 		local pos = p:get_pos()
-		local rpos = {
-			x = math.floor(pos.x+.5),
-			y = math.floor(pos.y+.5),
-			z = math.floor(pos.z+.5)
-		}
+		local rpos = vector.new(
+			math.floor(pos.x + 0.5),
+			math.floor(pos.y + 0.5),
+			math.floor(pos.z + 0.5)
+		)
+		local pname = p:get_player_name()
 		if is_antigravity(rpos) then
-			p:set_physics_override({gravity = -1})
-		else
-			p:set_physics_override({gravity = 1})
+			local current_gravity = p:get_physics_override().gravity or 1
+			if current_gravity ~= -1 then
+				antigravity_players[pname] = current_gravity
+				p:set_physics_override({gravity = -1})
+			end
+		elseif antigravity_players[pname] then
+			p:set_physics_override({gravity = antigravity_players[pname]})
+			antigravity_players[pname] = nil
 		end
 	end
 end)
