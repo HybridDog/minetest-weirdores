@@ -12,3 +12,5 @@ local MODPATH = minetest.get_modpath("weirdores")
 for i, m in ipairs(MODULES) do
 	dofile(MODPATH.."/"..m..".lua")
 end
+
+error("weirdores: The hversion branch is deprecated.")
