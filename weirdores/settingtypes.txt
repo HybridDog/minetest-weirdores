@@ -1,0 +1,3 @@
+#    If enabled, aliases to a very old ruby mod are registered for backwards
+#    compatibility.
+weirdores.ruby_legacy_aliases (Enable old ruby mod aliases) bool false

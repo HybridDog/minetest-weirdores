@@ -75,6 +75,3 @@ minetest.register_craft({
 		{'default:mese_crystal','default:mese_crystal','default:mese_crystal'},
 	}
 })
-
-minetest.register_alias("ruby:antigravity","weirdores:antigravity")
-

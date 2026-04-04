@@ -117,13 +117,3 @@ minetest.register_abm({
 		end
 	end,
 })
-
--- ALIASES --
--- This is for compatibility with older versions of the mod, "the ruby mod"
-minetest.register_alias("ruby:anticrystal","weirdores:antimese")
-minetest.register_alias("ruby:anticrystalblock","weirdores:antimeseblock")
-minetest.register_alias("ruby:pick_anticrystal", "weirdores:pick_antimese")
-minetest.register_alias("ruby:antimese","weirdores:antimese")
-minetest.register_alias("ruby:antimeseblock","weirdores:antimeseblock")
-minetest.register_alias("ruby:pick_antimese", "weirdores:pick_antimese")
-

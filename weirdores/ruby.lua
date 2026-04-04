@@ -49,15 +49,3 @@ minetest.register_craft({
 		{'weirdores:ruby', 'weirdores:ruby', 'weirdores:ruby'},
 	}
 })
-
-
--- This is for compatibility with the original version of the mod, which was a patch to default game
-minetest.register_alias("default:stone_with_ruby","weirdores:stone_with_ruby")
-minetest.register_alias("default:ruby","weirdores:ruby")
-
-
--- for old versions which were called "ruby"...
-minetest.register_alias("ruby:ruby","weirdores:ruby")
-minetest.register_alias("ruby:stone_with_ruby","weirdores:stone_with_ruby")
-minetest.register_alias("ruby:rubyblock","weirdores:rubyblock")
-
