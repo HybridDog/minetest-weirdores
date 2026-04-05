@@ -1,0 +1,18 @@
+Sounds
+
+antimese_fusion.ogg
+source: https://freesound.org/people/Anomaex/sounds/490266/
+accessed at: 2026-04-05T13+00:00
+title: Sci-Fi_Explosion_2.wav
+author: Anomaex
+SPDX-License-Identifier: CC0-1.0
+
+
+Textures
+
+SPDX-License-Identifier: CC-BY-4.0
+
+
+Code
+
+SPDX-License-Identifier: MIT

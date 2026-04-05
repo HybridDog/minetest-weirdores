@@ -63,6 +63,10 @@ minetest.register_abm({
 	interval = 5.0,
 	chance = 5,
 	action = function(pos)
+		minetest.sound_play("antimese_fusion", {
+			pos = pos,
+			pitch = 0.8 + (minetest.get_us_time() / 1024) % 0.4
+		}, true)
 		minetest.add_particlespawner({
 			amount = 10,
 			time = 1,
@@ -105,7 +109,14 @@ minetest.register_abm({
 			true
 		)
 		for _, cpos in ipairs(nodes_in_area["weirdores:rubyblock"]) do
-			minetest.add_item(cpos, {name="weirdores:antimese"})
+			-- We jitter the cpos position a bit to make item drops look more
+			-- chaotic
+			local off1 = (0.6180339887
+				* (cpos.y + 32 * cpos.x + 1024 * cpos.z)) % 1.0
+			local off2 = (1024 * off1 ^ 0.5) % 1.0
+			local item_pos = vector.new(cpos.x + off1 - 0.5, cpos.y,
+				cpos.z + off2 - 0.5)
+			minetest.add_item(item_pos, {name="weirdores:antimese"})
 				:set_velocity(vector.new(0, 10, 0))
 		end
 		for _, positions in pairs(nodes_in_area) do
